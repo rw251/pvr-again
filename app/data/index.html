@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>PVR</title>
+    <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <style>
+    html, body {
+      margin:0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: auto;
+      display: flex;
+      height: 100vh;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      margin: auto;
+      align-items: center;
+    }
+
+    .btn {
+      align-items:center;
+      background-color:rgba(0, 0, 0, 0);
+      border: 1px solid rgb(98, 0, 238);
+      border-radius:4px;
+      border-image-outset:0px;
+      border-image-repeat:stretch;
+      border-image-slice:100%;
+      border-image-source:none;
+      border-image-width:1;
+      box-sizing:border-box;
+      color:rgb(98, 0, 238);
+      cursor:default;
+      display:flex;
+      font-family:Roboto, sans-serif;
+      font-size:14px;
+      font-stretch:100%;
+      font-style:normal;
+      font-weight:500;
+      height:36px;
+      justify-content:center;
+      letter-spacing:1.25px;
+      line-height:normal;
+      margin-bottom:16px;
+      margin-left:32px;
+      margin-right:32px;
+      margin-top:16px;
+      min-width:64px;
+      outline-color:rgb(98, 0, 238);
+      outline-style:none;
+      outline-width:0px;
+      overflow-x:hidden;
+      overflow-y:hidden;
+      padding-bottom:0px;
+      padding-left:15px;
+      padding-right:15px;
+      padding-top:0px;
+      position:relative;
+      text-align:center;
+      text-decoration-color:rgb(98, 0, 238);
+      text-decoration-line:none;
+      text-decoration-style:solid;
+      text-indent:0px;
+      text-rendering:auto;
+      text-shadow:none;
+      text-transform:uppercase;
+      user-select:none;
+      vertical-align:middle;
+      width:130.052px;
+      word-spacing:0px;
+      writing-mode:horizontal-tb;
+      -webkit-appearance:none;
+      -webkit-font-smoothing:antialiased;
+      -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+    }
+    .btn:before {
+      background-color:rgb(98, 0, 238);
+      border-radius:50%;
+      content:"";
+      display:block;
+      height:68px;
+      left:-64.0208px;
+      opacity:0;
+      pointer-events:none;
+      position:absolute;
+      top:-17px;
+      transform:matrix(1, 0, 0, 1, 0, 0);
+      transition-delay:0s, 0s;
+      transition-duration:0.015s, 0.015s;
+      transition-property:opacity, background-color;
+      transition-timing-function:linear, linear;
+      width:256.104px;
+      z-index:1;
+    }
+    .btn:hover {
+      cursor: pointer;
+    }
+    .btn:hover:before,
+    .btn:focus:before,
+    .btn.highlight:before {
+      opacity: .04;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="btn" id="channelPicker" tabindex="0">EPG</div>
+      <div class="btn" id="recordings" tabindex="0">Recordings</div>
+      <div class="btn" id="config" tabindex="0">Settings</div>
+    </div>
+    <script src='renderer.js'></script>
+  </body>
+</html>
