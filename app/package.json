@@ -4,10 +4,10 @@
   "description": "electronJS-based balena application",
   "main": "main.js",
   "scripts": {
-    "dev": "NODE_ENV=development electron .",
+    "dev": "set NODE_ENV=development&& electron .",
     "lint": "eslint .",
-    "start": "NODE_ENV=production startx ./node_modules/electron/dist/electron .",
-    "local": "NODE_ENV=production electron ."
+    "start": "set NODE_ENV=production&& startx ./node_modules/electron/dist/electron .",
+    "local": "set NODE_ENV=production&& electron ."
   },
   "repository": {
     "type": "git",

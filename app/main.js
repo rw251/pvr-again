@@ -15,7 +15,7 @@ const electronConfig = {
   URL_LAUNCHER_TOUCH_SIMULATE: process.env.URL_LAUNCHER_TOUCH_SIMULATE === '1' ? 1 : 0,
   URL_LAUNCHER_FRAME: process.env.URL_LAUNCHER_FRAME === '1' ? 1 : 0,
   URL_LAUNCHER_KIOSK: process.env.URL_LAUNCHER_KIOSK === '1' ? 1 : 0,
-  URL_LAUNCHER_NODE: process.env.URL_LAUNCHER_NODE === '1' ? 1 : 0,
+  URL_LAUNCHER_NODE: process.env.URL_LAUNCHER_NODE === '0' ? 0 : 1,
   URL_LAUNCHER_WIDTH: parseInt(process.env.URL_LAUNCHER_WIDTH || 1920, 10),
   URL_LAUNCHER_HEIGHT: parseInt(process.env.URL_LAUNCHER_HEIGHT || 1080, 10),
   URL_LAUNCHER_TITLE: process.env.URL_LAUNCHER_TITLE || 'BALENA.IO',
@@ -46,13 +46,13 @@ if (electronConfig.URL_LAUNCHER_TOUCH_SIMULATE) {
 // Override the appData directory
 // See https://electronjs.org/docs/api/app#appgetpathname
 if (electronConfig.ELECTRON_APP_DATA_DIR) {
-  electron.app.setPath('appData', electronConfig.ELECTRON_APP_DATA_DIR)
+  electron.app.setPath('appData', electronConfig.ELECTRON_APP_DATA_DIR);
 }
 
 // Override the userData directory
 // NOTE: `userData` defaults to the `appData` directory appended with the app's name
 if (electronConfig.ELECTRON_USER_DATA_DIR) {
-  electron.app.setPath('userData', electronConfig.ELECTRON_USER_DATA_DIR)
+  electron.app.setPath('userData', electronConfig.ELECTRON_USER_DATA_DIR);
 }
 
 if (process.env.NODE_ENV === 'development') {
@@ -138,40 +138,40 @@ app.on('ready', () => {
 const WebSocketServer = require('websocket').server;
 const http = require('http');
 
-var server = http.createServer((req, res) => {
+let server = http.createServer((req, res) => {
   // allow cors
   res.setHeader('Access-Control-Allow-Origin', '*');
 });
-server.listen(8812, function() { });
+server.listen(8812, () => { });
 
 // create the server
 wsServer = new WebSocketServer({
-  httpServer: server
+  httpServer: server,
 });
 
 wsServer.on('connect', (connection) => {
   console.log('user connected');
-  connection.send('welcome')
+  connection.send('welcome');
 });
 // WebSocket server
-wsServer.on('request', function(request) {
-  var connection = request.accept(null, request.origin);
+wsServer.on('request', (request) => {
+  let connection = request.accept(null, request.origin);
 
   // This is the most important callback for us, we'll handle
   // all messages from users here.
-  connection.on('message', function(message) {
+  connection.on('message', (message) => {
     if (message.type === 'utf8') {
       // process WebSocket message
       const msg = JSON.parse(message.utf8Data);
-      if(msg.type === 'button') {
+      if (msg.type === 'button') {
         mainWindow.webContents.send('button', msg.value);
-        console.log('Button pressed: ' + msg.value);
+        console.log(`Button pressed: ${  msg.value}`);
       }
     }
   });
 
-  connection.on('close', function(connection) {
+  connection.on('close', (connection) => {
     // close user connection
-      console.log('closed');
+    console.log('closed');
   });
 });
