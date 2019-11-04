@@ -138,14 +138,14 @@ app.on('ready', () => {
 const WebSocketServer = require('websocket').server;
 const http = require('http');
 
-let server = http.createServer((req, res) => {
+const server = http.createServer((req, res) => {
   // allow cors
   res.setHeader('Access-Control-Allow-Origin', '*');
 });
 server.listen(8812, () => { });
 
 // create the server
-wsServer = new WebSocketServer({
+const wsServer = new WebSocketServer({
   httpServer: server,
 });
 
@@ -155,7 +155,7 @@ wsServer.on('connect', (connection) => {
 });
 // WebSocket server
 wsServer.on('request', (request) => {
-  let connection = request.accept(null, request.origin);
+  const connection = request.accept(null, request.origin);
 
   // This is the most important callback for us, we'll handle
   // all messages from users here.
@@ -165,12 +165,12 @@ wsServer.on('request', (request) => {
       const msg = JSON.parse(message.utf8Data);
       if (msg.type === 'button') {
         mainWindow.webContents.send('button', msg.value);
-        console.log(`Button pressed: ${  msg.value}`);
+        console.log(`Button pressed: ${msg.value}`);
       }
     }
   });
 
-  connection.on('close', (connection) => {
+  connection.on('close', () => {
     // close user connection
     console.log('closed');
   });
