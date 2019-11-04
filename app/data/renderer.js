@@ -1,4 +1,10 @@
+console.log('Renderer called');
+
+console.log('window: ', window);
+
 const { ipcRenderer } = window.require('electron');
+
+console.log('ipcrend: ', ipcRenderer);
 
 ipcRenderer.on('button', (event, arg) => {
   console.log(`BUTTON pressed: ${arg}`);

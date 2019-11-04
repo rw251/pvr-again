@@ -4,6 +4,8 @@ const path = require('path');
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow;
 
+console.log('main', 'start');
+
 const {
   app,
   BrowserWindow,
