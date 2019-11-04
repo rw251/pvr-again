@@ -31,29 +31,34 @@ const electronConfig = {
   ELECTRON_USER_DATA_DIR: process.env.ELECTRON_USER_DATA_DIR,
 };
 
-// Enable / disable hardware acceleration
+console.log('Enable / disable hardware acceleration');
 if (!electronConfig.ELECTRON_ENABLE_HW_ACCELERATION) {
+  console.log('doing it');
   app.disableHardwareAcceleration();
 }
 
-// enable touch events if your device supports them
+console.log('enable touch events if your device supports them');
 if (electronConfig.URL_LAUNCHER_TOUCH) {
+  console.log('doing it');
   app.commandLine.appendSwitch('--touch-devices');
 }
-// simulate touch events - might be useful for touchscreen with partial driver support
+console.log('simulate touch events - might be useful for touchscreen with partial driver support');
 if (electronConfig.URL_LAUNCHER_TOUCH_SIMULATE) {
+  console.log('doing it');
   app.commandLine.appendSwitch('--simulate-touch-screen-with-mouse');
 }
 
-// Override the appData directory
+console.log('Override the appData directory');
 // See https://electronjs.org/docs/api/app#appgetpathname
 if (electronConfig.ELECTRON_APP_DATA_DIR) {
+  console.log('doing it');
   electron.app.setPath('appData', electronConfig.ELECTRON_APP_DATA_DIR);
 }
 
-// Override the userData directory
+console.log('Override the userData directory');
 // NOTE: `userData` defaults to the `appData` directory appended with the app's name
 if (electronConfig.ELECTRON_USER_DATA_DIR) {
+  console.log('doing it');
   electron.app.setPath('userData', electronConfig.ELECTRON_USER_DATA_DIR);
 }
 
@@ -68,9 +73,11 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
+console.log('update-lock');
 // Listen for a 'update-lock' to either enable, disable or check
 // the update lock from the renderer process (i.e. the app)
 if (electronConfig.ELECTRON_BALENA_UPDATE_LOCK) {
+  console.log('doing it');
   const lockFile = require('lockfile');
   electron.ipcMain.on('update-lock', (event, command) => {
     switch (command) {
@@ -131,6 +138,7 @@ app.on('ready', () => {
     console.log(err);
   });
 
+  console.log('about to launch');
   // the big red button, here we go
   mainWindow.loadURL(electronConfig.URL_LAUNCHER_URL);
 });
@@ -140,11 +148,12 @@ app.on('ready', () => {
 const WebSocketServer = require('websocket').server;
 const http = require('http');
 
+console.log('creating server');
 const server = http.createServer((req, res) => {
   // allow cors
   res.setHeader('Access-Control-Allow-Origin', '*');
 });
-server.listen(8812, () => { });
+server.listen(8812, () => { console.log('SERVER LISTENEING') ;});
 
 // create the server
 const wsServer = new WebSocketServer({
@@ -157,6 +166,7 @@ wsServer.on('connect', (connection) => {
 });
 // WebSocket server
 wsServer.on('request', (request) => {
+  console.log('RQST');
   const connection = request.accept(null, request.origin);
 
   // This is the most important callback for us, we'll handle
