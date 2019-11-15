@@ -139,6 +139,7 @@ app.on('ready', () => {
   });
 
   console.log('about to launch');
+  console.log(electronConfig.URL_LAUNCHER_URL);
   // the big red button, here we go
   mainWindow.loadURL(electronConfig.URL_LAUNCHER_URL);
 });
@@ -153,7 +154,7 @@ const server = http.createServer((req, res) => {
   // allow cors
   res.setHeader('Access-Control-Allow-Origin', '*');
 });
-server.listen(8812, () => { console.log('SERVER LISTENEING') ;});
+server.listen(8812, () => { console.log('SERVER LISTENEING'); });
 
 // create the server
 const wsServer = new WebSocketServer({
