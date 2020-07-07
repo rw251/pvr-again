@@ -22,7 +22,7 @@
     "js"
   ],
   "dependencies": {
-    "electron": "~1.6.16",
+    "electron": "~7.2.4",
     "electron-rebuild": "^1.7.2",
     "lockfile": "^1.0.4",
     "websocket": "^1.0.30"
